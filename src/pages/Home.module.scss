@@ -1,0 +1,142 @@
+.pagina {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: $space-6 $space-5;
+  border-bottom: $borda-ficha;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(0.25rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+}
+
+.logo {
+  font-family: $fonte-pixel;
+  font-size: 1.5rem;
+  color: $cor-marrom;
+  text-align: center;
+  text-shadow: 0.125rem 0.125rem 0 $cor-laranja;
+}
+
+.tagline {
+  font-family: $fonte-corpo;
+  font-size: 0.875rem;
+  color: $cor-cinza;
+}
+
+.main {
+  flex: 1;
+  max-width: 72rem;
+  width: 90%;
+  margin: 0 auto;
+  padding: $space-6 0 $space-10;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-5;
+
+  @media (min-width: 40em) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 64em) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.carregando,
+.vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-10 0;
+}
+
+.carregandoTexto {
+  font-family: $fonte-pixel;
+  font-size: 0.6rem;
+  color: $cor-marrom;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.vazioTexto {
+  font-family: $fonte-pixel;
+  font-size: 0.75rem;
+  color: $cor-marrom;
+  text-align: center;
+}
+
+.vazioSub {
+  font-family: $fonte-corpo;
+  font-size: 0.9375rem;
+  color: $cor-cinza;
+}
+
+.badgesSection {
+  margin-top: $space-8;
+  padding: $space-4;
+  background: rgba(255, 255, 255, 0.5);
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  box-shadow: $sombra-solida;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.badgesTitulo {
+  font-family: $fonte-pixel;
+  font-size: 0.6rem;
+  color: $cor-marrom;
+}
+
+.badgesList {
+  display: flex;
+  gap: $space-3;
+  font-size: 1.5rem;
+}
+
+.fab {
+  position: fixed;
+  bottom: $space-6;
+  right: $space-6;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: $cor-laranja;
+  color: #fff;
+  font-size: 1.75rem;
+  font-weight: 700;
+  border: 0.125rem solid $cor-marrom;
+  box-shadow: $sombra-solida;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  z-index: 100;
+  line-height: 1;
+
+  &:hover {
+    transform: translate(-0.125rem, -0.125rem);
+    box-shadow: $sombra-hover;
+  }
+
+  &:active {
+    transform: translate(0.125rem, 0.125rem);
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,33 @@
+.botao {
+  font-family: $fonte-display;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  border: 0.125rem solid $cor-marrom;
+  border-radius: 0.5rem;
+  box-shadow: $sombra-solida;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+
+  &:hover:not(.desativado) {
+    transform: translate(0.125rem, 0.125rem);
+    box-shadow: none;
+  }
+
+  &:active:not(.desativado) {
+    transform: translate(0.25rem, 0.25rem);
+    box-shadow: none;
+  }
+}
+
+.primario   { background: $cor-laranja; color: #fff; }
+.secundario { background: #fff;         color: $cor-marrom; }
+.perigo     { background: $cor-vermelho; color: #fff; }
+
+.desativado {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

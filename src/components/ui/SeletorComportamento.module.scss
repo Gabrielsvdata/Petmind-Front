@@ -1,0 +1,61 @@
+.grupo {
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.legenda {
+  font-family: $fonte-pixel;
+  font-size: 0.6rem;
+  color: $cor-marrom;
+  margin-bottom: $space-2;
+}
+
+.opcoes {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.opcao {
+  background: #fff;
+  border: $borda-ficha;
+  border-radius: 0.5rem;
+  box-shadow: $sombra-solida;
+  padding: $space-3 $space-3;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-1;
+  min-width: 4rem;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+
+  &:hover {
+    transform: translate(-0.0625rem, -0.0625rem);
+    box-shadow: $sombra-hover;
+  }
+}
+
+.ativo {
+  background: $cor-marrom;
+  color: #fff;
+  transform: translate(0.125rem, 0.125rem);
+  box-shadow: none;
+
+  .label { color: #fff; }
+}
+
+.emoji {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.label {
+  font-family: $fonte-pixel;
+  font-size: 0.45rem;
+  color: $cor-marrom;
+  text-align: center;
+}

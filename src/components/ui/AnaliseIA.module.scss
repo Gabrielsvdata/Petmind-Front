@@ -1,0 +1,228 @@
+.container {
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  box-shadow: $sombra-solida;
+  background: white;
+  overflow: hidden;
+  margin-top: $space-5;
+}
+
+// Loading
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-4;
+  padding: $space-8;
+}
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 0.25rem solid $cor-grade;
+  border-top-color: $cor-laranja;
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+.loadingTexto {
+  font-family: $fonte-pixel;
+  font-size: 0.625rem;
+  color: $cor-marrom;
+}
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+
+// Header
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $space-5;
+  border-bottom: $borda-ficha;
+  background: $cor-papel;
+  gap: $space-4;
+  flex-wrap: wrap;
+}
+.estadoBloco {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+.estadoLabel {
+  font-size: 0.75rem;
+  font-family: $fonte-display;
+  font-weight: 700;
+  color: $cor-marrom;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.estadoBadge {
+  font-family: $fonte-pixel;
+  font-size: 0.625rem;
+  padding: $space-2 $space-4;
+  border-radius: 50rem;
+  border: 0.125rem solid $cor-marrom;
+  display: inline-block;
+
+  &.feliz     { background: $cor-verde;    color: white; }
+  &.animado   { background: $cor-amarelo;  color: $cor-marrom; }
+  &.agitado   { background: $cor-vermelho; color: white; }
+  &.sonolento { background: $cor-azul;     color: white; }
+  &.com_fome  { background: $cor-laranja;  color: white; }
+  &.triste    { background: $cor-roxo;     color: white; }
+}
+
+// Confiança
+.confiancaBloco {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: $space-1;
+  min-width: 8rem;
+}
+.confiancaNumero {
+  font-family: $fonte-pixel;
+  font-size: 1.5rem;
+  color: $cor-laranja;
+  line-height: 1;
+}
+.confiancaLabel {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  font-family: $fonte-display;
+}
+.confiancaBarra {
+  width: 100%;
+  height: 0.5rem;
+  background: $cor-grade;
+  border-radius: 50rem;
+  overflow: hidden;
+}
+.confiancaFill {
+  height: 100%;
+  background: $cor-laranja;
+  border-radius: 50rem;
+  transition: width 0.8s ease;
+}
+
+// Métricas
+.metricas {
+  padding: $space-5;
+  border-bottom: $borda-ficha;
+}
+.secaoTitulo {
+  font-family: $fonte-display;
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: $cor-marrom;
+  margin-bottom: $space-3;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.metricasGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @media (max-width: 30em) {
+    grid-template-columns: 1fr;
+  }
+}
+.metricaCard {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+.metricaLabel {
+  font-size: 0.75rem;
+  font-family: $fonte-display;
+  font-weight: 700;
+  color: $cor-marrom;
+  opacity: 0.7;
+}
+.metricaBarra {
+  height: 0.625rem;
+  background: $cor-grade;
+  border-radius: 0.125rem;
+  overflow: hidden;
+  border: 0.0625rem solid darken($cor-grade, 10%);
+}
+.metricaFill {
+  height: 100%;
+  background: $cor-laranja;
+  transition: width 0.6s ease;
+}
+.metricaRodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.metricaValor {
+  font-family: $fonte-pixel;
+  font-size: 0.5rem;
+  color: $cor-marrom;
+}
+.tendencia {
+  font-size: 0.6875rem;
+  font-family: $fonte-display;
+  font-weight: 700;
+  &.verde    { color: $cor-verde; }
+  &.vermelho { color: $cor-vermelho; }
+  &.neutro   { color: $cor-marrom; opacity: 0.5; }
+}
+
+// Alertas
+.alertas {
+  padding: $space-5;
+  border-bottom: $borda-ficha;
+  background: lighten($cor-vermelho, 45%);
+}
+.alertaItem {
+  font-size: 0.875rem;
+  font-family: $fonte-corpo;
+  color: $cor-vermelho;
+  padding: $space-2 $space-3;
+  border-left: 0.25rem solid $cor-vermelho;
+  margin-bottom: $space-2;
+  background: white;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+// Diagnóstico
+.diagnostico {
+  padding: $space-5;
+  border-bottom: $borda-ficha;
+}
+.diagnosticoTexto {
+  font-family: $fonte-corpo;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: $cor-marrom;
+  font-weight: 500;
+}
+
+// Recomendação
+.recomendacao {
+  padding: $space-5;
+  border-bottom: $borda-ficha;
+  background: lighten($cor-verde, 55%);
+}
+.recomendacaoTexto {
+  font-family: $fonte-corpo;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: $cor-verde;
+  font-weight: 500;
+}
+
+// Rodapé
+.rodape {
+  padding: $space-3 $space-5;
+  font-size: 0.75rem;
+  font-family: $fonte-display;
+  color: $cor-marrom;
+  opacity: 0.5;
+  text-align: right;
+}

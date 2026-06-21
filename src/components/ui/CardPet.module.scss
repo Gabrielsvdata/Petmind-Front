@@ -1,0 +1,68 @@
+.card {
+  background: #fff;
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  box-shadow: $sombra-solida;
+  padding: $space-5;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3;
+
+  // Dobra no canto superior direito
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    background: linear-gradient(225deg, $cor-papel 45%, $cor-grade 45%);
+  }
+
+  &:hover {
+    transform: translate(-0.125rem, -0.125rem);
+    box-shadow: $sombra-hover;
+  }
+
+  &:focus-visible {
+    outline: 0.125rem solid $cor-laranja;
+    outline-offset: 0.25rem;
+  }
+}
+
+.sprite {
+  display: flex;
+  justify-content: center;
+}
+
+.info {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+}
+
+.nome {
+  font-family: $fonte-display;
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: $cor-marrom;
+}
+
+.especie {
+  font-family: $fonte-corpo;
+  font-size: 0.8125rem;
+  color: $cor-cinza;
+  text-transform: capitalize;
+}
+
+.badgeRow {
+  display: flex;
+  justify-content: center;
+}
