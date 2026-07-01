@@ -1,8 +1,9 @@
-import { useState }    from 'react'
-import { useNavigate } from 'react-router-dom'
-import { cadastrarPet } from '../services/api'
+import { useState }       from 'react'
+import { useNavigate }    from 'react-router-dom'
+import { cadastrarPet }   from '../services/api'
 import { SeletorEspecie } from '../components/ui/SeletorEspecie'
 import { Botao }          from '../components/ui/Botao'
+import { Breadcrumb }     from '../components/ui/Breadcrumb'
 import styles             from './CadastrarPet.module.scss'
 
 export default function CadastrarPet() {
@@ -42,6 +43,10 @@ export default function CadastrarPet() {
 
   return (
     <div className={styles.pagina}>
+      <Breadcrumb itens={[
+        { label: 'Home', to: '/' },
+        { label: 'Novo Pet' },
+      ]} />
       <header className={styles.header}>
         <button className={styles.voltar} onClick={() => navigate('/')} aria-label="Voltar">←</button>
         <h1 className={styles.titulo}>Novo Pet</h1>
@@ -83,7 +88,7 @@ export default function CadastrarPet() {
                 value={form.raca}
                 onChange={handleChange}
                 maxLength={60}
-                placeholder="Raça ou 'SRD'"
+                placeholder="Raça ou 'Sem raça definida'"
               />
             </div>
 

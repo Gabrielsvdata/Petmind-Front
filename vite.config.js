@@ -7,8 +7,9 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: (content) =>
-          `@import "${path.resolve('./src/styles/variables').replace(/\\/g, '/')}";${content}`,
+        api: 'modern-compiler',
+        loadPaths: [path.resolve('./src/styles')],
+        additionalData: `@use 'sass:color';\n@use 'variables' as *;\n`,
       },
     },
   },

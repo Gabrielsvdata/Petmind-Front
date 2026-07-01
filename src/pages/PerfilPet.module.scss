@@ -2,6 +2,14 @@
   min-height: 100vh;
 }
 
+.semResultado {
+  font-family: $fonte-display;
+  font-size: 0.875rem;
+  color: $cor-cinza;
+  text-align: center;
+  padding: $space-6 0;
+}
+
 .centrado {
   min-height: 100vh;
   display: flex;

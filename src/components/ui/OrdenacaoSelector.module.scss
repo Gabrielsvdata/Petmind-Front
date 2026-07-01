@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  flex-wrap: wrap;
+}
+
+.label {
+  font-family: $fonte-display;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: $cor-marrom;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.opcoes {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.opcao {
+  padding: 0.375rem 0.875rem;
+  border: $borda-ficha;
+  border-radius: 50rem;
+  font-family: $fonte-display;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: white;
+  color: $cor-marrom;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: $cor-grade;
+  }
+
+  &.ativo {
+    background: $cor-marrom;
+    color: white;
+    box-shadow: $sombra-solida;
+  }
+}

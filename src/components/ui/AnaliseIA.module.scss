@@ -146,7 +146,7 @@
   background: $cor-grade;
   border-radius: 0.125rem;
   overflow: hidden;
-  border: 0.0625rem solid darken($cor-grade, 10%);
+  border: 0.0625rem solid color.adjust($cor-grade, $lightness: -10%);
 }
 .metricaFill {
   height: 100%;
@@ -176,7 +176,7 @@
 .alertas {
   padding: $space-5;
   border-bottom: $borda-ficha;
-  background: lighten($cor-vermelho, 45%);
+  background: color.adjust($cor-vermelho, $lightness: 45%);
 }
 .alertaItem {
   font-size: 0.875rem;
@@ -207,7 +207,7 @@
 .recomendacao {
   padding: $space-5;
   border-bottom: $borda-ficha;
-  background: lighten($cor-verde, 55%);
+  background: color.adjust($cor-verde, $lightness: 55%);
 }
 .recomendacaoTexto {
   font-family: $fonte-corpo;

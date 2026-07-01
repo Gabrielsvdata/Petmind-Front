@@ -1,10 +1,14 @@
 import { useState, useEffect }    from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { usePet }                 from '../hooks/usePet'
+import { calcularEstado }         from '../services/api'
 import { PetSprite }              from '../components/sprites/PetSprite'
 import { Badge }                  from '../components/ui/Badge'
 import { Botao }                  from '../components/ui/Botao'
 import { AnaliseIA }              from '../components/ui/AnaliseIA'
+import { FiltrosHistorico }       from '../components/ui/FiltrosHistorico'
+import { StreakIndicador }        from '../components/ui/StreakIndicador'
+import { Breadcrumb }             from '../components/ui/Breadcrumb'
 import styles                     from './PerfilPet.module.scss'
 
 const BADGES_KEY = 'petmind_badges'
@@ -32,9 +36,30 @@ export default function PerfilPet() {
   const { pet, registros, ultimo, analise, loading, error, analisar } = usePet(id)
   const [analisando, setAnalisando]   = useState(false)
   const [analiseAtual, setAnalise]    = useState(null)
+  const [filtroEstado, setFiltroEstado]   = useState('todos')
+  const [filtroCopa,   setFiltroCopa]     = useState(false)
+  const [filtroPeriodo, setFiltroPeriodo] = useState('todos')
 
   const estado = ultimo?.estado_emocional ?? 'feliz'
   const ult    = registros[0]
+
+  function verificarPeriodo(dataHora, periodo) {
+    if (periodo === 'todos') return true
+    const data  = new Date(dataHora)
+    const hoje  = new Date()
+    const diff  = (hoje - data) / (1000 * 60 * 60 * 24)
+    if (periodo === 'semana') return diff <= 7
+    if (periodo === 'mes')    return diff <= 30
+    return true
+  }
+
+  const registrosFiltrados = registros.filter((r) => {
+    const estadoReg  = calcularEstado(r.agitacao, r.sono, r.apetite, r.humor)
+    const passaEstado  = filtroEstado === 'todos' || estadoReg === filtroEstado
+    const passaCopa    = !filtroCopa || r.observacoes?.includes('⚽')
+    const passaPeriodo = verificarPeriodo(r.data_hora, filtroPeriodo)
+    return passaEstado && passaCopa && passaPeriodo
+  })
 
   // Desbloquear badge na primeira visita com registros
   useEffect(() => {
@@ -94,6 +119,11 @@ export default function PerfilPet() {
 
   return (
     <div className={styles.pagina}>
+      <Breadcrumb itens={[
+        { label: 'Home', to: '/' },
+        { label: pet?.nome ?? '...' },
+      ]} />
+
       <header className={styles.header}>
         <button className={styles.voltar} onClick={() => navigate('/')} aria-label="Voltar">←</button>
         <h1 className={styles.titulo}>{pet.nome}</h1>
@@ -107,6 +137,7 @@ export default function PerfilPet() {
             <h2 className={styles.nomeHero}>{pet.nome}</h2>
             <p className={styles.especiePet}>{pet.especie} · {pet.raca}</p>
             <Badge estado={estado} />
+            <StreakIndicador registros={registros} />
           </div>
         </section>
 
@@ -145,22 +176,33 @@ export default function PerfilPet() {
         {registros.length > 0 && (
           <section className={styles.historico}>
             <h3 className={styles.secaoTitulo}>Histórico</h3>
-            <div className={styles.historicoLista}>
-              {registros.slice(0, 10).map((r, i) => (
-                <article key={r.id ?? i} className={styles.registroCard}>
-                  <div className={styles.registroData}>
-                    {r.data ? new Date(r.data).toLocaleDateString('pt-BR') : `Registro ${i + 1}`}
-                  </div>
-                  <div className={styles.registroMetricas}>
-                    <span>😤 {r.agitacao}</span>
-                    <span>😴 {r.sono}</span>
-                    <span>🍖 {r.apetite}</span>
-                    <span>😊 {r.humor}</span>
-                  </div>
-                  {r.estado_emocional && <Badge estado={r.estado_emocional} />}
-                </article>
-              ))}
-            </div>
+
+            <FiltrosHistorico
+              filtroEstado={filtroEstado}   setFiltroEstado={setFiltroEstado}
+              filtroCopa={filtroCopa}       setFiltroCopa={setFiltroCopa}
+              filtroPeriodo={filtroPeriodo} setFiltroPeriodo={setFiltroPeriodo}
+            />
+
+            {registrosFiltrados.length === 0 ? (
+              <p className={styles.semResultado}>Nenhum registro encontrado com esses filtros.</p>
+            ) : (
+              <div className={styles.historicoLista}>
+                {registrosFiltrados.slice(0, 10).map((r, i) => (
+                  <article key={r.id ?? i} className={styles.registroCard}>
+                    <div className={styles.registroData}>
+                      {r.data_hora ? new Date(r.data_hora).toLocaleDateString('pt-BR') : `Registro ${i + 1}`}
+                    </div>
+                    <div className={styles.registroMetricas}>
+                      <span>😤 {r.agitacao}</span>
+                      <span>😴 {r.sono}</span>
+                      <span>🍖 {r.apetite}</span>
+                      <span>😊 {r.humor}</span>
+                    </div>
+                    <Badge estado={calcularEstado(r.agitacao, r.sono, r.apetite, r.humor)} />
+                  </article>
+                ))}
+              </div>
+            )}
           </section>
         )}
       </main>

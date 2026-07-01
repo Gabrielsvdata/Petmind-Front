@@ -1,0 +1,31 @@
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 24rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: $borda-ficha;
+  border-radius: 50rem;
+  background: white;
+  font-family: $fonte-corpo;
+  font-size: 0.875rem;
+  box-shadow: $sombra-solida;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: $cor-laranja;
+  }
+}
+
+.icone {
+  position: absolute;
+  left: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.4;
+  pointer-events: none;
+}

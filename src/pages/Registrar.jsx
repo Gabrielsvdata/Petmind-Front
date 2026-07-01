@@ -6,6 +6,7 @@ import { SeletorComportamento }    from '../components/ui/SeletorComportamento'
 import { Botao }                   from '../components/ui/Botao'
 import { Badge }                   from '../components/ui/Badge'
 import { usePet }                  from '../hooks/usePet'
+import { Breadcrumb }              from '../components/ui/Breadcrumb'
 import styles                      from './Registrar.module.scss'
 
 export default function Registrar() {
@@ -43,6 +44,11 @@ export default function Registrar() {
 
   return (
     <div className={styles.pagina}>
+      <Breadcrumb itens={[
+        { label: 'Home', to: '/' },
+        { label: pet?.nome ?? '...', to: `/pets/${id}` },
+        { label: 'Registrar comportamento' },
+      ]} />
       <header className={styles.header}>
         <button className={styles.voltar} onClick={() => navigate(`/pets/${id}`)} aria-label="Voltar">←</button>
         <h1 className={styles.titulo}>Registrar hoje</h1>

@@ -1,0 +1,41 @@
+.nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: $space-3 $space-5;
+  border-bottom: 0.0625rem solid $cor-grade;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.sep {
+  color: $cor-marrom;
+  opacity: 0.4;
+  font-size: 0.875rem;
+  margin: 0 $space-1;
+}
+
+.link {
+  font-family: $fonte-display;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: $cor-laranja;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.atual {
+  font-family: $fonte-display;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: $cor-marrom;
+  opacity: 0.6;
+}
