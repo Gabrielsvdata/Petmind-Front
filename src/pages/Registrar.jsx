@@ -3,10 +3,12 @@ import { useParams, useNavigate }  from 'react-router-dom'
 import { calcularEstado }          from '../services/api'
 import { PetSprite }               from '../components/sprites/PetSprite'
 import { SeletorComportamento }    from '../components/ui/SeletorComportamento'
+import { SeletorEventos }          from '../components/ui/SeletorEventos'
 import { Botao }                   from '../components/ui/Botao'
 import { Badge }                   from '../components/ui/Badge'
 import { usePet }                  from '../hooks/usePet'
 import { Breadcrumb }              from '../components/ui/Breadcrumb'
+import { montarObservacoesComEventos } from '../services/eventos'
 import styles                      from './Registrar.module.scss'
 
 export default function Registrar() {
@@ -19,6 +21,8 @@ export default function Registrar() {
   })
   const [loading, setLoading] = useState(false)
   const [erro, setErro]       = useState(null)
+  const [eventosSelecionados, setEventosSelecionados] = useState([])
+  const [observacoes, setObservacoes] = useState('')
 
   const estadoAtual = calcularEstado(
     valores.agitacao, valores.sono, valores.apetite, valores.humor
@@ -33,7 +37,14 @@ export default function Registrar() {
     setLoading(true)
     setErro(null)
     try {
-      await registrar(valores)
+      const observacoesCompletas = montarObservacoesComEventos(
+        eventosSelecionados,
+        observacoes
+      )
+      await registrar({
+        ...valores,
+        observacoes: observacoesCompletas || null,
+      })
       navigate(`/pets/${id}`)
     } catch (err) {
       setErro(err.response?.data?.detail ?? 'Erro ao salvar registro')
@@ -73,6 +84,25 @@ export default function Registrar() {
               onChange={(v) => handleChange(campo, v)}
             />
           ))}
+
+          <SeletorEventos
+            selecionados={eventosSelecionados}
+            onChange={setEventosSelecionados}
+          />
+
+          <div className={styles.campoObservacoes}>
+            <label className={styles.labelObservacoes} htmlFor="observacoes">
+              Observações do dia
+            </label>
+            <textarea
+              id="observacoes"
+              className={styles.textareaObservacoes}
+              value={observacoes}
+              onChange={(e) => setObservacoes(e.target.value)}
+              placeholder="Ex.: ficou mais quieto após a visita"
+              rows={4}
+            />
+          </div>
 
           {erro && <p className={styles.erro}>{erro}</p>}
 

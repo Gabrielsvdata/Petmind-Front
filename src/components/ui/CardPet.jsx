@@ -3,12 +3,12 @@ import { PetSprite } from '../sprites/PetSprite'
 import { Badge }     from './Badge'
 import styles        from './CardPet.module.scss'
 
-export function CardPet({ pet, estado }) {
+export function CardPet({ pet, estado, precisaAtencao = false }) {
   const navigate = useNavigate()
 
   return (
     <article
-      className={styles.card}
+      className={`${styles.card} ${precisaAtencao ? styles.atencao : ''}`}
       onClick={() => navigate(`/pets/${pet.id}`)}
       role="button"
       tabIndex={0}
@@ -22,7 +22,11 @@ export function CardPet({ pet, estado }) {
         <h3 className={styles.nome}>{pet.nome}</h3>
         <p className={styles.especie}>{pet.especie} · {pet.raca}</p>
         <div className={styles.badgeRow}>
-          <Badge estado={estado} />
+          {precisaAtencao ? (
+            <span className={styles.badgeAlerta}>⚠️ Precisa de atenção</span>
+          ) : (
+            <Badge estado={estado} />
+          )}
         </div>
       </div>
     </article>

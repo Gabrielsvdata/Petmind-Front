@@ -1,33 +1,39 @@
-// Será preenchido quando as imagens chegarem
+import cachorroIdle   from '../assets/sprites/cachorro/cachorro-idle.png'
+import cachorroFeliz  from '../assets/sprites/cachorro/cachorro-feliz.png'
+import cachorroTriste from '../assets/sprites/cachorro/cachorro-triste.png'
+import gatoIdle       from '../assets/sprites/gato/gato-idle.png'
+import gatoFeliz      from '../assets/sprites/gato/gato-feliz.png'
+import gatoTriste     from '../assets/sprites/gato/gato-triste.png'
+import hamsterIdle    from '../assets/sprites/hamster/hamster-idle.png'
+import hamsterFeliz   from '../assets/sprites/hamster/hamster-feliz.png'
+import hamsterTriste  from '../assets/sprites/hamster/hamster-triste.png'
+// Mantido o nome atual do arquivo para evitar quebra de build.
+import coelhoIdle     from '../assets/sprites/coelho/coelho-idle.png'
+import coelhoFeliz    from '../assets/sprites/coelho/coelho-feliz.png'
+import coelhoTriste   from '../assets/sprites/coelho/coelho-triste.png'
 
-export const SPRITES_BASE_PATH = '/src/assets/sprites'
+const SPRITES = {
+  cachorro: { idle: cachorroIdle, feliz: cachorroFeliz, triste: cachorroTriste },
+  gato: { idle: gatoIdle, feliz: gatoFeliz, triste: gatoTriste },
+  hamster: { idle: hamsterIdle, feliz: hamsterFeliz, triste: hamsterTriste },
+  coelho: { idle: coelhoIdle, feliz: coelhoFeliz, triste: coelhoTriste },
+}
 
-export const ESTADOS_VALIDOS = [
-  'idle',
-  'feliz',
-  'triste',
-  'agitado',
-  'sonolento',
-  'com_fome',
-]
-
-export const ESPECIES_VALIDAS = [
-  'cachorro',
-  'gato',
-  'hamster',
-  'coelho',
-]
-
-// Mapeamento estado backend → sprite
 export function getSpriteParaEstado(especie, estado) {
-  const mapaEstado = {
-    feliz:     'feliz',
-    animado:   'feliz',
-    agitado:   'agitado',
+  const grupo = SPRITES[especie] ?? SPRITES.cachorro
+  if (['feliz', 'animado', 'agitado'].includes(estado)) return grupo.feliz
+  if (estado === 'triste') return grupo.triste
+  return grupo.idle
+}
+
+export function getClasseAnimacao(estado) {
+  const mapa = {
+    feliz: 'feliz',
+    animado: 'animado',
+    agitado: 'agitado',
     sonolento: 'sonolento',
-    com_fome:  'com_fome',
-    triste:    'triste',
+    com_fome: 'com_fome',
+    triste: 'triste',
   }
-  const spriteEstado = mapaEstado[estado] ?? 'idle'
-  return `${SPRITES_BASE_PATH}/${especie}/${spriteEstado}.png`
+  return mapa[estado] ?? 'idle'
 }

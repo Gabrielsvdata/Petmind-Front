@@ -1,0 +1,180 @@
+.pagina {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-5;
+}
+
+.card {
+  width: 100%;
+  max-width: 28rem;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  background: white;
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  box-shadow: $sombra-solida;
+  padding: $space-5;
+}
+
+.titulo {
+  font-family: $fonte-display;
+  font-size: 1.25rem;
+  color: $cor-marrom;
+  font-weight: 800;
+  margin-bottom: $space-2;
+}
+
+.label {
+  font-family: $fonte-display;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: $cor-marrom;
+  font-weight: 700;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: $borda-ficha;
+  border-radius: 0.5rem;
+  padding: $space-3;
+  font-family: $fonte-corpo;
+  font-size: 0.9375rem;
+}
+
+.textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.botao,
+.botaoSecundario {
+  border: $borda-ficha;
+  border-radius: 0.5rem;
+  padding: $space-3 $space-4;
+  font-family: $fonte-display;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.botao {
+  background: $cor-laranja;
+  color: white;
+}
+
+.botaoSecundario {
+  background: $cor-papel;
+  color: $cor-marrom;
+}
+
+.blocoForm {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.links {
+  display: flex;
+  gap: $space-3;
+  flex-wrap: wrap;
+
+  a {
+    color: $cor-laranja;
+    font-family: $fonte-display;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
+
+.erro {
+  color: $cor-vermelho;
+  font-family: $fonte-display;
+  font-size: 0.8125rem;
+}
+
+.ok {
+  color: $cor-verde;
+  font-family: $fonte-display;
+  font-size: 0.8125rem;
+}
+
+.popupSucesso {
+  border: $borda-ficha;
+  border-radius: 0.5rem;
+  background: lighten($cor-verde, 50%);
+  color: darken($cor-verde, 10%);
+  padding: $space-3 $space-4;
+  font-family: $fonte-display;
+  font-size: 0.875rem;
+  font-weight: 800;
+  box-shadow: $sombra-solida;
+}
+
+.loginPagina {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.loginTopo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.loginLogo {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.9375rem;
+  color: #2c1a0e;
+  text-align: center;
+}
+
+.loginSprite {
+  width: 6rem;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.loginCard {
+  max-width: 22rem;
+  border-radius: 30% 8% 30% 8% / 8% 30% 8% 30%;
+  border: 0.125rem solid #2c1a0e;
+  box-shadow: 0.25rem 0.375rem 0 0 #2c1a0e;
+  background: white;
+  padding: 2rem;
+}
+
+.loginInput {
+  border: 0.125rem solid #2c1a0e;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+
+  &:focus {
+    border-color: #e8651a;
+    outline: none;
+  }
+}
+
+.loginBotao {
+  background: #e8651a;
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  box-shadow: 0.25rem 0.375rem 0 0 #2c1a0e;
+
+  &:hover {
+    transform: translate(0.125rem, 0.125rem);
+    box-shadow: none;
+  }
+}

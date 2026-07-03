@@ -5,7 +5,7 @@
 }
 
 .header {
-  padding: $space-6 $space-5;
+  padding: 0.5rem 0.75rem;
   border-bottom: $borda-ficha;
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(0.25rem);
@@ -29,25 +29,53 @@
   color: $cor-cinza;
 }
 
+.sair {
+  align-self: flex-end;
+  border: $borda-ficha;
+  border-radius: 0.5rem;
+  padding: $space-2 $space-3;
+  font-family: $fonte-display;
+  font-weight: 700;
+  background: white;
+  color: $cor-marrom;
+  cursor: pointer;
+}
+
 .main {
   flex: 1;
   max-width: 72rem;
   width: 90%;
   margin: 0 auto;
-  padding: $space-6 0 $space-10;
+  padding: 0.75rem 0 1.25rem;
+}
+
+.bannerCopa {
+  margin-bottom: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  border: $borda-ficha;
+  border-radius: 0.75rem;
+  background: #d9f0dd;
+  color: #1a5c2a;
+  font-family: $fonte-display;
+  font-weight: 800;
+  font-size: 0.875rem;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-5;
+  gap: 0.75rem;
 
-  @media (min-width: 40em) {
+  @media (min-width: 30em) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: 64em) {
+  @media (min-width: 50em) {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 70em) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -86,8 +114,8 @@
 }
 
 .badgesSection {
-  margin-top: $space-8;
-  padding: $space-4;
+  margin-top: 0.75rem;
+  padding: 0.5rem;
   background: rgba(255, 255, 255, 0.5);
   border: $borda-ficha;
   border-radius: $borda-organica;
@@ -142,12 +170,12 @@
 }
 
 .controles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $space-4;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: $space-5;
+  justify-content: stretch;
+  margin-bottom: 0.75rem;
 }
 
 .semResultado {

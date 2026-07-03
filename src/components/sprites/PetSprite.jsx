@@ -1,25 +1,21 @@
-// AGUARDANDO IMAGENS — placeholder temporário
+import { getClasseAnimacao, getSpriteParaEstado } from '../../services/sprites'
+import styles from './PetSprite.module.scss'
 
-export function PetSprite({ especie, estado, tamanho = 'm' }) {
-  const tamanhos = { g: '14rem', m: '8rem', p: '4rem' }
-  const fontes   = { g: '6rem',  m: '4rem', p: '2rem' }
-  const emoji = {
-    cachorro: '🐶',
-    gato:     '🐱',
-    hamster:  '🐹',
-    coelho:   '🐰',
-  }
+export function PetSprite({ especie, estado = 'idle', tamanho = 'm' }) {
+  const src = getSpriteParaEstado(especie, estado)
+  const classeAnim = getClasseAnimacao(estado)
 
   return (
-    <div style={{
-      width:           tamanhos[tamanho] ?? '8rem',
-      height:          tamanhos[tamanho] ?? '8rem',
-      display:         'flex',
-      alignItems:      'center',
-      justifyContent:  'center',
-      fontSize:        fontes[tamanho]   ?? '4rem',
-    }}>
-      {emoji[especie] ?? '🐾'}
+    <div className={`${styles.container} ${styles[tamanho]}`}>
+      <img
+        src={src}
+        alt={`${especie} ${estado}`}
+        className={`${styles.sprite} ${styles[classeAnim]}`}
+        draggable={false}
+      />
+      {estado === 'com_fome' && (
+        <span className={styles.bolhaComida}>🍖</span>
+      )}
     </div>
   )
 }

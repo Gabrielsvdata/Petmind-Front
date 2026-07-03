@@ -1,0 +1,45 @@
+.registroCard {
+  background: #fff;
+  border: $borda-ficha;
+  border-radius: 0.375rem;
+  box-shadow: 0.125rem 0.1875rem 0 0 $cor-marrom;
+  padding: $space-3 $space-4;
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  flex-wrap: wrap;
+}
+
+.registroData {
+  font-family: $fonte-pixel;
+  font-size: 0.5rem;
+  color: $cor-marrom;
+  min-width: 5rem;
+}
+
+.registroMetricas {
+  display: flex;
+  gap: $space-3;
+  font-family: $fonte-corpo;
+  font-size: 0.875rem;
+  color: $cor-marrom;
+  flex: 1;
+}
+
+.eventosLinha {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-top: $space-1;
+}
+
+.eventoPill {
+  padding: 0.25rem 0.625rem;
+  border: 0.0625rem solid $cor-grade;
+  border-radius: 50rem;
+  background: $cor-papel;
+  font-family: $fonte-corpo;
+  font-size: 0.75rem;
+  color: $cor-marrom;
+}

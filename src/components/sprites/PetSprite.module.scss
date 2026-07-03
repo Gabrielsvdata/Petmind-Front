@@ -3,7 +3,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: white;
 }
 
 // Tamanhos
@@ -18,7 +17,6 @@
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   user-select: none;
-  background: white;
 }
 
 // Bolha de comida
@@ -57,10 +55,20 @@
   50%       { transform: translateY(-0.5rem); }
 }
 
-.feliz    .sprite { animation: abanar       0.8s ease-in-out infinite; }
-.animado  .sprite { animation: pular        0.5s ease-in-out infinite; }
-.agitado  .sprite { animation: tremer       0.25s ease-in-out infinite; }
-.sonolento .sprite { animation: respirarLento 2.5s ease-in-out infinite; opacity: 0.85; }
-.com_fome .sprite { animation: respirar     1.5s ease-in-out infinite; }
-.triste   .sprite { filter: saturate(0.6); }
+.feliz { animation: abanar 0.8s ease-in-out infinite; }
+
+.animado { animation: pular 0.5s ease-in-out infinite; }
+
+.agitado { animation: tremer 0.25s ease-in-out infinite; }
+
+.sonolento {
+  animation: respirarLento 2.5s ease-in-out infinite;
+  opacity: 0.85;
+}
+
+.com_fome { animation: respirar 1.5s ease-in-out infinite; }
+
+.triste { filter: saturate(0.6); }
+
+.idle { animation: respirar 3s ease-in-out infinite; }
 

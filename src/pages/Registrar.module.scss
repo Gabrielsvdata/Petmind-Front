@@ -75,6 +75,37 @@
   gap: $space-5;
 }
 
+.campoObservacoes {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.labelObservacoes {
+  font-family: $fonte-display;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: $cor-marrom;
+}
+
+.textareaObservacoes {
+  width: 100%;
+  padding: $space-3;
+  border: $borda-ficha;
+  border-radius: 0.5rem;
+  font-family: $fonte-corpo;
+  font-size: 0.9375rem;
+  color: $cor-marrom;
+  resize: vertical;
+  min-height: 6rem;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: $cor-laranja;
+  }
+}
+
 .acoes {
   display: flex;
   gap: $space-4;

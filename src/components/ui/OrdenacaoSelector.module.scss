@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   gap: $space-3;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .label {
@@ -17,7 +17,7 @@
 .opcoes {
   display: flex;
   gap: $space-2;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .opcao {

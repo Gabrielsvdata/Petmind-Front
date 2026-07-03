@@ -9,6 +9,7 @@ import { AnaliseIA }              from '../components/ui/AnaliseIA'
 import { FiltrosHistorico }       from '../components/ui/FiltrosHistorico'
 import { StreakIndicador }        from '../components/ui/StreakIndicador'
 import { Breadcrumb }             from '../components/ui/Breadcrumb'
+import { HistoricoCard }          from '../components/ui/HistoricoCard'
 import styles                     from './PerfilPet.module.scss'
 
 const BADGES_KEY = 'petmind_badges'
@@ -188,18 +189,7 @@ export default function PerfilPet() {
             ) : (
               <div className={styles.historicoLista}>
                 {registrosFiltrados.slice(0, 10).map((r, i) => (
-                  <article key={r.id ?? i} className={styles.registroCard}>
-                    <div className={styles.registroData}>
-                      {r.data_hora ? new Date(r.data_hora).toLocaleDateString('pt-BR') : `Registro ${i + 1}`}
-                    </div>
-                    <div className={styles.registroMetricas}>
-                      <span>😤 {r.agitacao}</span>
-                      <span>😴 {r.sono}</span>
-                      <span>🍖 {r.apetite}</span>
-                      <span>😊 {r.humor}</span>
-                    </div>
-                    <Badge estado={calcularEstado(r.agitacao, r.sono, r.apetite, r.humor)} />
-                  </article>
+                  <HistoricoCard key={r.id ?? i} registro={r} index={i} />
                 ))}
               </div>
             )}

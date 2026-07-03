@@ -7,6 +7,8 @@ import { Busca }                        from '../components/ui/Busca'
 import { DashboardResumo }              from '../components/ui/DashboardResumo'
 import { MenuAcoesRapidas }             from '../components/ui/MenuAcoesRapidas'
 import { OrdenacaoSelector }            from '../components/ui/OrdenacaoSelector'
+import { useJogoCopa }                  from '../hooks/useJogoCopa'
+import { limparAuth }                   from '../services/api'
 import styles                           from './Home.module.scss'
 
 const BADGES_KEY = 'petmind_badges'
@@ -24,6 +26,22 @@ export default function Home() {
   const [ordenacao, setOrdenacao]           = useState('recente')
   const navigate                            = useNavigate()
   const badges                              = getBadges()
+  const temJogoCopaHoje                     = useJogoCopa()
+
+  function calcularDiasDesde(dataHora) {
+    if (!dataHora) return null
+    const hoje = new Date()
+    const data = new Date(dataHora)
+    return Math.floor((hoje - data) / (1000 * 60 * 60 * 24))
+  }
+
+  function petPrecisaAtencao(ultimo) {
+    if (!ultimo) return false
+    const estado = ultimo.estado_emocional
+    if (!['triste', 'com_fome'].includes(estado)) return false
+    const dias = calcularDiasDesde(ultimo.data_hora)
+    return dias !== null && dias >= 2
+  }
 
   useEffect(() => {
     listarPets()
@@ -80,9 +98,24 @@ export default function Home() {
       <header className={styles.header}>
         <h1 className={styles.logo}>🐾 PETMIND</h1>
         <p className={styles.tagline}>Monitoramento emocional para seu pet</p>
+        <button
+          className={styles.sair}
+          onClick={() => {
+            limparAuth()
+            navigate('/login')
+          }}
+        >
+          Sair
+        </button>
       </header>
 
       <main className={styles.main}>
+        {temJogoCopaHoje && (
+          <div className={styles.bannerCopa}>
+            ⚽ Tem jogo da Copa hoje! Não esqueça de registrar como seu pet reagiu.
+          </div>
+        )}
+
         {loading ? (
           <div className={styles.carregando}>
             <PetSprite especie="cachorro" estado="animado" tamanho="m" />
@@ -108,7 +141,12 @@ export default function Home() {
             ) : (
               <div className={styles.grid}>
                 {petsOrdenados.map((pet) => (
-                  <CardPet key={pet.id} pet={pet} estado={ultimosRegistros[pet.id]?.estado_emocional} />
+                  <CardPet
+                    key={pet.id}
+                    pet={pet}
+                    estado={ultimosRegistros[pet.id]?.estado_emocional}
+                    precisaAtencao={petPrecisaAtencao(ultimosRegistros[pet.id])}
+                  />
                 ))}
               </div>
             )}

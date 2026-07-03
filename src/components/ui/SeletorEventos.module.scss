@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.titulo {
+  font-family: $fonte-display;
+  font-weight: 800;
+  font-size: 0.875rem;
+  color: $cor-marrom;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.opcional {
+  font-weight: 400;
+  opacity: 0.5;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.categoria {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.categoriaLabel {
+  font-family: $fonte-display;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.eventos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.eventoBtn {
+  padding: $space-2 $space-3;
+  border: $borda-ficha;
+  border-radius: 50rem;
+  background: white;
+  font-family: $fonte-corpo;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+
+  &:hover {
+    transform: translate(-0.0625rem, -0.0625rem);
+    box-shadow: $sombra-solida;
+  }
+
+  &.ativo {
+    background: $cor-marrom;
+    color: white;
+    box-shadow: $sombra-solida;
+  }
+}
