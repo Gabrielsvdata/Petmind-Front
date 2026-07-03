@@ -2,3 +2,10 @@ node_modules
 dist/
 .env.dev
 
+
+# local env
+.env
+
+# generated sprite css artifacts
+src/components/sprites/PetSprite.module.css
+src/components/sprites/PetSprite.module.css.map
