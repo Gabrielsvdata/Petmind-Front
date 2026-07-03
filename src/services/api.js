@@ -1,6 +1,10 @@
 import axios from 'axios'
 
-const api = axios.create({ baseURL: import.meta.env.VITE_API_URL })
+const API_BASE_URL = (
+  import.meta.env.VITE_API_URL ?? 'https://petmind.onrender.com'
+).replace(/\/+$/, '')
+
+const api = axios.create({ baseURL: API_BASE_URL })
 
 const AUTH_KEY = 'petmind_auth'
 
