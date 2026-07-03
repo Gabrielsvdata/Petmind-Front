@@ -94,5 +94,5 @@
   font-weight: 800;
   border: 0.125rem solid $cor-vermelho;
   color: $cor-vermelho;
-  background: lighten($cor-vermelho, 43%);
+  background: color.adjust($cor-vermelho, $lightness: 43%);
 }
