@@ -1,10 +1,29 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { cadastrarAdmin } from '../services/api'
+import { cadastrarAdmin, cadastrarUsuario } from '../services/api'
 import styles from './Auth.module.scss'
 
-export default function CadastroAdmin() {
+const configuracaoPorTipo = {
+  usuario: {
+    titulo: 'Criar conta',
+    acao: 'Cadastrar',
+    carregando: 'Criando conta...',
+    sucesso: 'Cadastro efetuado com sucesso! Redirecionando para login...',
+    erro: 'Falha no cadastro',
+    submit: cadastrarUsuario,
+  },
+  admin: {
+    titulo: 'Cadastro administrativo',
+    acao: 'Cadastrar admin',
+    carregando: 'Criando acesso...',
+    sucesso: 'Cadastro administrativo efetuado com sucesso! Redirecionando para login...',
+    erro: 'Falha no cadastro administrativo',
+    submit: cadastrarAdmin,
+  },
+}
+
+export default function CadastroConta({ tipo = 'usuario' }) {
   const navigate = useNavigate()
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
@@ -13,16 +32,18 @@ export default function CadastroAdmin() {
   const [loading, setLoading] = useState(false)
   const [sucesso, setSucesso] = useState(false)
 
+  const config = configuracaoPorTipo[tipo] ?? configuracaoPorTipo.usuario
+
   async function handleSubmit(e) {
     e.preventDefault()
     setErro(null)
     setLoading(true)
     try {
-      await cadastrarAdmin({ nome, email, senha })
+      await config.submit({ nome, email, senha })
       setSucesso(true)
       setTimeout(() => navigate('/login'), 1300)
     } catch (err) {
-      setErro(err.response?.data?.detail ?? 'Falha no cadastro administrativo')
+      setErro(err.response?.data?.detail ?? config.erro)
     } finally {
       setLoading(false)
     }
@@ -31,7 +52,7 @@ export default function CadastroAdmin() {
   return (
     <div className={styles.pagina}>
       <form className={styles.card} onSubmit={handleSubmit}>
-        <h1 className={styles.titulo}>Cadastro administrativo</h1>
+        <h1 className={styles.titulo}>{config.titulo}</h1>
 
         <label className={styles.label} htmlFor="nome">Nome</label>
         <input id="nome" className={styles.input} type="text" value={nome} onChange={(e) => setNome(e.target.value)} required />
@@ -44,13 +65,13 @@ export default function CadastroAdmin() {
 
         {erro && <p className={styles.erro}>{erro}</p>}
 
-        <button className={styles.botaoSecundario} type="submit" disabled={loading}>
-          {loading ? 'Criando acesso...' : 'Cadastrar admin'}
+        <button className={tipo === 'admin' ? styles.botaoSecundario : styles.botao} type="submit" disabled={loading}>
+          {loading ? config.carregando : config.acao}
         </button>
 
         {sucesso && (
           <div className={styles.popupSucesso}>
-            Cadastro administrativo efetuado com sucesso! Redirecionando para login...
+            {config.sucesso}
           </div>
         )}
 

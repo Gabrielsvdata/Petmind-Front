@@ -51,7 +51,7 @@ export default function Login() {
 
         <div className={styles.links}>
           <Link to="/cadastro">Criar conta</Link>
-          <Link to="/cadastro-admin">Cadastro administrativo</Link>
+          <Link to="/cadastro-admin">Admin local</Link>
         </div>
       </form>
     </div>

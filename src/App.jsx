@@ -9,8 +9,7 @@ import PerfilPet    from './pages/PerfilPet'
 import CadastrarPet from './pages/CadastrarPet'
 import Registrar    from './pages/Registrar'
 import Login        from './pages/Login'
-import CadastroUsuario from './pages/CadastroUsuario'
-import CadastroAdmin from './pages/CadastroAdmin'
+import CadastroConta from './pages/CadastroConta'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminPets from './pages/admin/AdminPets'
 import AdminUsuarios from './pages/admin/AdminUsuarios'
@@ -23,8 +22,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/cadastro" element={<CadastroUsuario />} />
-      <Route path="/cadastro-admin" element={<CadastroAdmin />} />
+      <Route path="/cadastro" element={<CadastroConta tipo="usuario" />} />
+      <Route path="/cadastro-admin" element={<CadastroConta tipo="admin" />} />
 
       <Route element={<RotaProtegida />}>
         <Route path="/home" element={<Home />} />

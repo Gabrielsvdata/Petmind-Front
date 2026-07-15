@@ -62,7 +62,7 @@ export default function Landing() {
                 Já tenho conta
               </Link>
               <Link className={styles.botaoSecundario} to="/cadastro-admin">
-                Cadastro administrativo
+                Bootstrap admin local
               </Link>
             </div>
           </div>
@@ -136,7 +136,7 @@ export default function Landing() {
             Criar conta grátis →
           </Link>
           <Link className={styles.botaoSecundario} to="/cadastro-admin">
-            Criar acesso admin
+            Criar admin local
           </Link>
         </div>
       </section>
