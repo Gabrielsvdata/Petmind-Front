@@ -91,6 +91,33 @@
   }
 }
 
+.grupoOpcoes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-2;
+}
+
+.opcao,
+.opcaoAtiva {
+  border: $borda-ficha;
+  border-radius: 999px;
+  padding: $space-2 $space-3;
+  font-family: $fonte-display;
+  font-size: 0.875rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.opcao {
+  background: white;
+  color: $cor-marrom;
+}
+
+.opcaoAtiva {
+  background: $cor-marrom;
+  color: white;
+}
+
 .erro {
   color: $cor-vermelho;
   font-family: $fonte-display;

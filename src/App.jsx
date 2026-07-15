@@ -22,8 +22,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/cadastro" element={<CadastroConta tipo="usuario" />} />
-      <Route path="/cadastro-admin" element={<CadastroConta tipo="admin" />} />
+      <Route path="/cadastro" element={<CadastroConta />} />
 
       <Route element={<RotaProtegida />}>
         <Route path="/home" element={<Home />} />

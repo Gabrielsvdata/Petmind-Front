@@ -45,6 +45,11 @@ export function usuarioEhAdmin() {
   return auth?.papel === 'admin'
 }
 
+export function usuarioEhComum() {
+  const auth = obterAuth()
+  return auth?.papel === 'usuario'
+}
+
 api.interceptors.request.use((config) => {
   const auth = obterAuth()
   if (auth?.email && auth?.senha) {
@@ -55,7 +60,6 @@ api.interceptors.request.use((config) => {
 })
 
 export const cadastrarUsuario = (dados) => api.post('/auth/register', dados)
-export const cadastrarAdmin = (dados) => api.post('/auth/register-admin', dados)
 export const loginUsuario = (dados) => api.post('/auth/login', dados)
 export const usuarioLogado = () => api.get('/auth/me')
 

@@ -7,6 +7,7 @@ import styles from './Auth.module.scss'
 
 export default function Login() {
   const navigate = useNavigate()
+  const [tipoAcesso, setTipoAcesso] = useState('usuario')
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [erro, setErro] = useState(null)
@@ -18,10 +19,17 @@ export default function Login() {
     setLoading(true)
     try {
       const res = await loginUsuario({ email, senha })
+      const papel = res.data?.papel ?? 'usuario'
+      if (tipoAcesso === 'admin' && papel !== 'admin') {
+        throw new Error('Este login não pertence a um administrador')
+      }
+      if (tipoAcesso === 'usuario' && papel !== 'usuario') {
+        throw new Error('Use a opção de acesso administrativo para esta conta')
+      }
       salvarAuth(email, senha, res.data)
-      navigate('/home')
+      navigate(papel === 'admin' ? '/admin' : '/home')
     } catch (err) {
-      setErro(err.response?.data?.detail ?? 'Falha no login')
+      setErro(err.response?.data?.detail ?? err.message ?? 'Falha no login')
     } finally {
       setLoading(false)
     }
@@ -37,6 +45,24 @@ export default function Login() {
       <form className={`${styles.card} ${styles.loginCard}`} onSubmit={handleSubmit}>
         <h1 className={styles.titulo}>Entrar no PetMind</h1>
 
+        <label className={styles.label}>Tipo de acesso</label>
+        <div className={styles.grupoOpcoes}>
+          <button
+            className={tipoAcesso === 'usuario' ? styles.opcaoAtiva : styles.opcao}
+            type="button"
+            onClick={() => setTipoAcesso('usuario')}
+          >
+            Usuário comum
+          </button>
+          <button
+            className={tipoAcesso === 'admin' ? styles.opcaoAtiva : styles.opcao}
+            type="button"
+            onClick={() => setTipoAcesso('admin')}
+          >
+            Administrador
+          </button>
+        </div>
+
         <label className={styles.label} htmlFor="email">E-mail</label>
         <input id="email" className={`${styles.input} ${styles.loginInput}`} type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
@@ -51,7 +77,6 @@ export default function Login() {
 
         <div className={styles.links}>
           <Link to="/cadastro">Criar conta</Link>
-          <Link to="/cadastro-admin">Admin local</Link>
         </div>
       </form>
     </div>
