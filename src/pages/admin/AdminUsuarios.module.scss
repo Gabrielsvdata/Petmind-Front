@@ -10,6 +10,12 @@
   gap: $space-2;
 }
 
+.topoAcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
 .titulo {
   font-family: $fonte-display;
   font-size: 2rem;
@@ -34,7 +40,9 @@
 }
 
 .alerta,
+.sucesso,
 .cardTabela,
+.cardFormulario,
 .modal,
 .metrica,
 .petItem {
@@ -44,8 +52,10 @@
 }
 
 .alerta,
+.sucesso,
 .estadoTela,
 .cardTabela,
+.cardFormulario,
 .modal,
 .metrica,
 .petItem {
@@ -53,12 +63,58 @@
 }
 
 .alerta,
+.sucesso,
 .estadoTela {
   padding: $space-4;
 }
 
-.cardTabela {
+.sucesso {
+  color: $cor-verde;
+}
+
+.cardTabela,
+.cardFormulario {
   padding: $space-4;
+}
+
+.formulario {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-3;
+
+  @media (max-width: 48em) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formTitulo {
+  grid-column: 1 / -1;
+  font-family: $fonte-display;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  font-family: $fonte-display;
+  font-size: 0.9rem;
+  font-weight: 800;
+
+  input {
+    border: $borda-ficha;
+    border-radius: 0.85rem;
+    padding: $space-3;
+    font-family: $fonte-corpo;
+    font-size: 0.95rem;
+  }
+}
+
+.formAcoes {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .tabelaWrap {

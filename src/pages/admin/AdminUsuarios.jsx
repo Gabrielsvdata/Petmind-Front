@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import {
   adminAlterarPapel,
   adminBuscarUsuario,
+  adminCriarAdministrador,
   adminDeletarUsuario,
   adminListarUsuarios,
 } from '../../services/api'
@@ -13,11 +14,16 @@ export default function AdminUsuarios() {
   const [detalhe, setDetalhe] = useState(null)
   const [loading, setLoading] = useState(true)
   const [erro, setErro] = useState('')
+  const [sucesso, setSucesso] = useState('')
   const [carregandoDetalhe, setCarregandoDetalhe] = useState(false)
+  const [mostrarCriacao, setMostrarCriacao] = useState(false)
+  const [novoAdmin, setNovoAdmin] = useState({ nome: '', email: '', senha: '' })
+  const [salvandoAdmin, setSalvandoAdmin] = useState(false)
 
   async function carregarUsuarios() {
     setLoading(true)
     setErro('')
+    setSucesso('')
 
     try {
       const res = await adminListarUsuarios()
@@ -32,6 +38,29 @@ export default function AdminUsuarios() {
   useEffect(() => {
     carregarUsuarios()
   }, [])
+
+  function atualizarCampoAdmin(campo, valor) {
+    setNovoAdmin((estadoAtual) => ({ ...estadoAtual, [campo]: valor }))
+  }
+
+  async function criarAdministrador(e) {
+    e.preventDefault()
+    setErro('')
+    setSucesso('')
+    setSalvandoAdmin(true)
+
+    try {
+      await adminCriarAdministrador(novoAdmin)
+      setSucesso('Administrador criado com sucesso.')
+      setNovoAdmin({ nome: '', email: '', senha: '' })
+      setMostrarCriacao(false)
+      await carregarUsuarios()
+    } catch (err) {
+      setErro(err.response?.data?.detail ?? 'Não foi possível criar o administrador.')
+    } finally {
+      setSalvandoAdmin(false)
+    }
+  }
 
   async function abrirDetalhes(id) {
     setCarregandoDetalhe(true)
@@ -85,9 +114,62 @@ export default function AdminUsuarios() {
       <div className={styles.topo}>
         <h2 className={styles.titulo}>Usuários</h2>
         <p className={styles.subtitulo}>Gerencie acesso, papel e histórico de pets.</p>
+        <div className={styles.topoAcoes}>
+          <button
+            className={styles.acao}
+            onClick={() => setMostrarCriacao((valorAtual) => !valorAtual)}
+          >
+            {mostrarCriacao ? 'Fechar criação' : 'Criar conta de administrador'}
+          </button>
+        </div>
       </div>
 
       {erro && <div className={styles.alerta}>{erro}</div>}
+      {sucesso && <div className={styles.sucesso}>{sucesso}</div>}
+
+      {mostrarCriacao && (
+        <section className={styles.cardFormulario}>
+          <form className={styles.formulario} onSubmit={criarAdministrador}>
+            <h3 className={styles.formTitulo}>Novo administrador</h3>
+
+            <label className={styles.campo}>
+              <span>Nome</span>
+              <input
+                value={novoAdmin.nome}
+                onChange={(e) => atualizarCampoAdmin('nome', e.target.value)}
+                required
+              />
+            </label>
+
+            <label className={styles.campo}>
+              <span>E-mail</span>
+              <input
+                type="email"
+                value={novoAdmin.email}
+                onChange={(e) => atualizarCampoAdmin('email', e.target.value)}
+                required
+              />
+            </label>
+
+            <label className={styles.campo}>
+              <span>Senha</span>
+              <input
+                type="password"
+                value={novoAdmin.senha}
+                onChange={(e) => atualizarCampoAdmin('senha', e.target.value)}
+                minLength={6}
+                required
+              />
+            </label>
+
+            <div className={styles.formAcoes}>
+              <button className={styles.acao} type="submit" disabled={salvandoAdmin}>
+                {salvandoAdmin ? 'Criando...' : 'Criar administrador'}
+              </button>
+            </div>
+          </form>
+        </section>
+      )}
 
       <section className={styles.cardTabela}>
         {loading ? (
