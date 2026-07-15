@@ -1,0 +1,150 @@
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.topo {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.titulo {
+  font-family: $fonte-display;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.subtitulo,
+.subtituloPainel,
+.estadoTela {
+  font-family: $fonte-corpo;
+  font-size: 1rem;
+  color: rgba(44, 26, 14, 0.76);
+}
+
+.estadoTela {
+  padding: $space-6;
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  background: white;
+  box-shadow: $sombra-solida;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: $space-4;
+
+  @media (max-width: 56em) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 32em) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cardResumo,
+.cardPainel {
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  background: white;
+  box-shadow: $sombra-solida;
+}
+
+.cardResumo {
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  align-items: center;
+  text-align: center;
+}
+
+.numeroResumo {
+  font-family: $fonte-pixel;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  color: $cor-laranja;
+}
+
+.rotuloResumo,
+.cardTitulo,
+.barraRotulo,
+.barraNumero {
+  font-family: $fonte-display;
+}
+
+.rotuloResumo {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.gridAnalitico {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-4;
+
+  @media (max-width: 56em) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cardPainel {
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.cardTitulo {
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+
+.barras {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.barraLinha {
+  display: grid;
+  grid-template-columns: minmax(8rem, 12rem) 1fr auto;
+  gap: $space-3;
+  align-items: center;
+
+  @media (max-width: 36em) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.barraRotulo {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.barraTrilha {
+  min-height: 1rem;
+  border: $borda-ficha;
+  border-radius: 999rem;
+  background: rgba(232, 101, 26, 0.12);
+  overflow: hidden;
+}
+
+.barraValor {
+  min-height: 1rem;
+  border-radius: 999rem;
+  background: $cor-laranja;
+}
+
+.barraNumero {
+  font-size: 1rem;
+  font-weight: 900;
+}

@@ -111,7 +111,7 @@ export default function PerfilPet() {
     return (
       <div className={styles.centrado}>
         <p className={styles.erro}>{error}</p>
-        <Botao variante="secundario" onClick={() => navigate('/')}>← Voltar</Botao>
+        <Botao variante="secundario" onClick={() => navigate('/home')}>← Voltar</Botao>
       </div>
     )
   }
@@ -121,12 +121,12 @@ export default function PerfilPet() {
   return (
     <div className={styles.pagina}>
       <Breadcrumb itens={[
-        { label: 'Home', to: '/' },
+        { label: 'Home', to: '/home' },
         { label: pet?.nome ?? '...' },
       ]} />
 
       <header className={styles.header}>
-        <button className={styles.voltar} onClick={() => navigate('/')} aria-label="Voltar">←</button>
+        <button className={styles.voltar} onClick={() => navigate('/home')} aria-label="Voltar">←</button>
         <h1 className={styles.titulo}>{pet.nome}</h1>
       </header>
 

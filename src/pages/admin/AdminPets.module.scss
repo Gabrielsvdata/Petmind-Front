@@ -1,0 +1,77 @@
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.topo {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.titulo {
+  font-family: $fonte-display;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.subtitulo,
+.alerta,
+.estadoTela {
+  font-family: $fonte-corpo;
+  font-size: 1rem;
+  color: rgba(44, 26, 14, 0.76);
+}
+
+.alerta,
+.estadoTela,
+.cardTabela {
+  background: white;
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  box-shadow: $sombra-solida;
+}
+
+.alerta,
+.estadoTela,
+.cardTabela {
+  padding: $space-4;
+}
+
+.tabelaWrap {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 46rem;
+
+  th,
+  td {
+    padding: $space-3;
+    border-bottom: 0.125rem solid rgba(44, 26, 14, 0.14);
+    text-align: left;
+    font-family: $fonte-corpo;
+    font-size: 0.95rem;
+  }
+
+  th {
+    font-family: $fonte-display;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+}
+
+.acaoPerigo {
+  padding: 0.55rem 0.9rem;
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  font-family: $fonte-display;
+  font-size: 0.85rem;
+  font-weight: 800;
+  background: $cor-laranja;
+  color: white;
+  box-shadow: $sombra-solida;
+}

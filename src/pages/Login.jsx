@@ -17,9 +17,9 @@ export default function Login() {
     setErro(null)
     setLoading(true)
     try {
-      await loginUsuario({ email, senha })
-      salvarAuth(email, senha)
-      navigate('/')
+      const res = await loginUsuario({ email, senha })
+      salvarAuth(email, senha, res.data)
+      navigate('/home')
     } catch (err) {
       setErro(err.response?.data?.detail ?? 'Falha no login')
     } finally {
@@ -51,7 +51,7 @@ export default function Login() {
 
         <div className={styles.links}>
           <Link to="/cadastro">Criar conta</Link>
-          <Link to="/esqueci-senha">Trocar senha</Link>
+          <Link to="/cadastro-admin">Cadastro administrativo</Link>
         </div>
       </form>
     </div>

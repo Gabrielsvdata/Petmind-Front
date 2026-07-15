@@ -1,0 +1,314 @@
+.pagina {
+  min-height: 100vh;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent calc(2rem - 0.0625rem),
+      rgba(44, 26, 14, 0.08) calc(2rem - 0.0625rem),
+      rgba(44, 26, 14, 0.08) 2rem
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent calc(2rem - 0.0625rem),
+      rgba(44, 26, 14, 0.08) calc(2rem - 0.0625rem),
+      rgba(44, 26, 14, 0.08) 2rem
+    ),
+    $cor-papel;
+}
+
+.hero,
+.secao,
+.copa,
+.ctaFinal {
+  width: min(92%, 76rem);
+  margin: 0 auto;
+}
+
+.hero {
+  padding: $space-6 0 $space-8;
+}
+
+.faixaTopo {
+  width: 100%;
+  height: 0.25rem;
+  background: #1f6b43;
+  border-radius: 999rem;
+}
+
+.heroConteudo {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: $space-6;
+  align-items: center;
+  padding-top: $space-6;
+
+  @media (max-width: 56em) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.heroTexto {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.marca,
+.kicker,
+.kickerClaro {
+  font-family: $fonte-pixel;
+  font-size: 0.7rem;
+  line-height: 1.8;
+}
+
+.marca {
+  color: #1f6b43;
+}
+
+.titulo {
+  font-family: $fonte-pixel;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.4;
+  color: $cor-marrom;
+}
+
+.subtitulo {
+  max-width: 38rem;
+  font-family: $fonte-display;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  opacity: 0.7;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-3;
+}
+
+.botaoPrimario,
+.botaoSecundario,
+.ctaBotao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-3 $space-5;
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  box-shadow: $sombra-solida;
+  font-family: $fonte-display;
+  font-weight: 800;
+  transition: transform 0.18s ease;
+
+  &:hover {
+    transform: translate(-0.125rem, -0.125rem);
+  }
+}
+
+.botaoPrimario {
+  background: $cor-laranja;
+  color: white;
+}
+
+.botaoSecundario {
+  background: white;
+  color: $cor-marrom;
+}
+
+.spriteGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-4;
+}
+
+.spriteCard,
+.passoCard,
+.badgeCard {
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: $sombra-solida;
+}
+
+.spriteCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 11rem;
+  padding: $space-4;
+}
+
+.sprite {
+  width: 8rem;
+  image-rendering: pixelated;
+  animation: float 2s ease-in-out infinite;
+}
+
+.delayA .sprite {
+  animation-delay: 0s;
+}
+
+.delayB .sprite {
+  animation-delay: 0.25s;
+}
+
+.delayC .sprite {
+  animation-delay: 0.5s;
+}
+
+.delayD .sprite {
+  animation-delay: 0.75s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-0.75rem);
+  }
+}
+
+.secao {
+  padding: $space-8 0;
+}
+
+.secaoCabecalho {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-bottom: $space-5;
+}
+
+.kicker {
+  color: $cor-laranja;
+}
+
+.secaoTitulo,
+.copaTitulo,
+.ctaTitulo {
+  font-family: $fonte-display;
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  line-height: 1.15;
+}
+
+.passosGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-4;
+
+  @media (max-width: 48em) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.passoCard {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-5;
+}
+
+.passoEmoji,
+.badgeEmoji {
+  font-size: 2rem;
+}
+
+.passoTitulo,
+.badgeTitulo {
+  font-family: $fonte-display;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.passoTexto,
+.badgeTexto,
+.copaDescricao {
+  font-family: $fonte-corpo;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.copa {
+  margin-top: $space-4;
+  margin-bottom: $space-4;
+  padding: $space-6;
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  background: #1f6b43;
+  color: white;
+  box-shadow: $sombra-solida;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: $space-5;
+  align-items: center;
+
+  @media (max-width: 48em) {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+}
+
+.kickerClaro {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.copaTexto {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.copaSprite {
+  width: min(18rem, 48vw);
+  image-rendering: pixelated;
+  animation: float 2s ease-in-out infinite;
+}
+
+.badgesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-4;
+
+  @media (max-width: 56em) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 36em) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.badgeCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: $space-3;
+  align-items: start;
+  padding: $space-4;
+}
+
+.ctaFinal {
+  margin-top: $space-6;
+  margin-bottom: $space-8;
+  padding: $space-6;
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  background: $cor-laranja;
+  color: white;
+  box-shadow: $sombra-solida;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-4;
+  text-align: center;
+}
+
+.ctaBotao {
+  background: white;
+  color: $cor-laranja;
+}

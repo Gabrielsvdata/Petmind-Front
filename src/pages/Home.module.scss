@@ -15,6 +15,13 @@
   gap: $space-2;
 }
 
+.headerAcoes {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: $space-2;
+}
+
 .logo {
   font-family: $fonte-pixel;
   font-size: 1.5rem;
@@ -30,15 +37,26 @@
 }
 
 .sair {
-  align-self: flex-end;
   border: $borda-ficha;
-  border-radius: 0.5rem;
+  border-radius: $borda-organica;
   padding: $space-2 $space-3;
   font-family: $fonte-display;
   font-weight: 700;
   background: white;
   color: $cor-marrom;
   cursor: pointer;
+  box-shadow: $sombra-solida;
+}
+
+.admin {
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  padding: $space-2 $space-3;
+  font-family: $fonte-display;
+  font-weight: 800;
+  background: $cor-laranja;
+  color: white;
+  box-shadow: $sombra-solida;
 }
 
 .main {

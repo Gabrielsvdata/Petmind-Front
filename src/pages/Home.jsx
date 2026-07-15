@@ -8,7 +8,7 @@ import { DashboardResumo }              from '../components/ui/DashboardResumo'
 import { MenuAcoesRapidas }             from '../components/ui/MenuAcoesRapidas'
 import { OrdenacaoSelector }            from '../components/ui/OrdenacaoSelector'
 import { useJogoCopa }                  from '../hooks/useJogoCopa'
-import { limparAuth }                   from '../services/api'
+import { limparAuth, obterAuth }        from '../services/api'
 import styles                           from './Home.module.scss'
 
 const BADGES_KEY = 'petmind_badges'
@@ -27,6 +27,7 @@ export default function Home() {
   const navigate                            = useNavigate()
   const badges                              = getBadges()
   const temJogoCopaHoje                     = useJogoCopa()
+  const auth                                = obterAuth()
 
   function calcularDiasDesde(dataHora) {
     if (!dataHora) return null
@@ -98,15 +99,25 @@ export default function Home() {
       <header className={styles.header}>
         <h1 className={styles.logo}>🐾 PETMIND</h1>
         <p className={styles.tagline}>Monitoramento emocional para seu pet</p>
-        <button
-          className={styles.sair}
-          onClick={() => {
-            limparAuth()
-            navigate('/login')
-          }}
-        >
-          Sair
-        </button>
+        <div className={styles.headerAcoes}>
+          {auth?.papel === 'admin' && (
+            <button
+              className={styles.admin}
+              onClick={() => navigate('/admin')}
+            >
+              Painel admin
+            </button>
+          )}
+          <button
+            className={styles.sair}
+            onClick={() => {
+              limparAuth()
+              navigate('/login')
+            }}
+          >
+            Sair
+          </button>
+        </div>
       </header>
 
       <main className={styles.main}>
@@ -169,7 +180,7 @@ export default function Home() {
 
       <MenuAcoesRapidas
         temPets={pets.length > 0}
-        onNovoPet={() => navigate('/cadastrar')}
+        onNovoPet={() => navigate('/pets/novo')}
         onRegistrar={() => primeiroPetId && navigate(`/pets/${primeiroPetId}/registrar`)}
         onAnalisar={() => primeiroPetId && navigate(`/pets/${primeiroPetId}`)}
       />

@@ -1,0 +1,203 @@
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.topo {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.titulo {
+  font-family: $fonte-display;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.subtitulo,
+.estadoTela,
+.modalTexto,
+.metricaRotulo,
+.listaTitulo,
+.petItem span {
+  color: rgba(44, 26, 14, 0.76);
+}
+
+.subtitulo,
+.estadoTela,
+.modalTexto,
+.petItem span {
+  font-family: $fonte-corpo;
+  font-size: 1rem;
+}
+
+.alerta,
+.cardTabela,
+.modal,
+.metrica,
+.petItem {
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  box-shadow: $sombra-solida;
+}
+
+.alerta,
+.estadoTela,
+.cardTabela,
+.modal,
+.metrica,
+.petItem {
+  background: white;
+}
+
+.alerta,
+.estadoTela {
+  padding: $space-4;
+}
+
+.cardTabela {
+  padding: $space-4;
+}
+
+.tabelaWrap {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 52rem;
+
+  th,
+  td {
+    padding: $space-3;
+    border-bottom: 0.125rem solid rgba(44, 26, 14, 0.14);
+    text-align: left;
+    font-family: $fonte-corpo;
+    font-size: 0.95rem;
+  }
+
+  th {
+    font-family: $fonte-display;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+}
+
+.papel {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  border: $borda-ficha;
+  border-radius: 999rem;
+  font-family: $fonte-display;
+  font-size: 0.85rem;
+  font-weight: 800;
+  background: $cor-papel;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.acao,
+.acaoPerigo,
+.fechar {
+  padding: 0.55rem 0.9rem;
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  font-family: $fonte-display;
+  font-size: 0.85rem;
+  font-weight: 800;
+  box-shadow: $sombra-solida;
+}
+
+.acao,
+.fechar {
+  background: white;
+  color: $cor-marrom;
+}
+
+.acaoPerigo {
+  background: $cor-laranja;
+  color: white;
+}
+
+.modalFundo {
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 26, 14, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-4;
+}
+
+.modal {
+  width: min(100%, 42rem);
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.modalTopo {
+  display: flex;
+  justify-content: space-between;
+  gap: $space-3;
+  align-items: flex-start;
+
+  @media (max-width: 32em) {
+    flex-direction: column;
+  }
+}
+
+.modalTitulo {
+  font-family: $fonte-display;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.modalGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-3;
+
+  @media (max-width: 32em) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metrica,
+.petItem {
+  padding: $space-4;
+}
+
+.metrica {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.metricaRotulo,
+.listaTitulo {
+  font-family: $fonte-display;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.listaPets {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.petItem {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}

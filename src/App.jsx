@@ -1,26 +1,50 @@
-import { Routes, Route } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
+
+import { RotaAdmin } from './components/guards/RotaAdmin'
+import { RotaProtegida } from './components/guards/RotaProtegida'
+import AdminLayout from './components/admin/AdminLayout'
+import Landing from './pages/Landing'
 import Home         from './pages/Home'
 import PerfilPet    from './pages/PerfilPet'
 import CadastrarPet from './pages/CadastrarPet'
 import Registrar    from './pages/Registrar'
 import Login        from './pages/Login'
 import CadastroUsuario from './pages/CadastroUsuario'
-import EsqueciSenha from './pages/EsqueciSenha'
-import { RequireAuth } from './components/ui/RequireAuth'
+import CadastroAdmin from './pages/CadastroAdmin'
+import AdminDashboard from './pages/admin/AdminDashboard'
+import AdminPets from './pages/admin/AdminPets'
+import AdminUsuarios from './pages/admin/AdminUsuarios'
+import { estaAutenticado } from './services/api'
 
 function App() {
+  const autenticado = estaAutenticado()
+
   return (
     <Routes>
+      <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/cadastro" element={<CadastroUsuario />} />
-      <Route path="/esqueci-senha" element={<EsqueciSenha />} />
+      <Route path="/cadastro-admin" element={<CadastroAdmin />} />
 
-      <Route element={<RequireAuth />}>
-        <Route path="/" element={<Home />} />
+      <Route element={<RotaProtegida />}>
+        <Route path="/home" element={<Home />} />
+        <Route path="/pets/novo" element={<CadastrarPet />} />
         <Route path="/pets/:id" element={<PerfilPet />} />
-        <Route path="/cadastrar" element={<CadastrarPet />} />
         <Route path="/pets/:id/registrar" element={<Registrar />} />
       </Route>
+
+      <Route element={<RotaAdmin />}>
+        <Route element={<AdminLayout />}>
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/usuarios" element={<AdminUsuarios />} />
+          <Route path="/admin/pets" element={<AdminPets />} />
+        </Route>
+      </Route>
+
+      <Route
+        path="*"
+        element={<Navigate to={autenticado ? '/home' : '/'} replace />}
+      />
     </Routes>
   )
 }

@@ -44,11 +44,11 @@ export default function CadastrarPet() {
   return (
     <div className={styles.pagina}>
       <Breadcrumb itens={[
-        { label: 'Home', to: '/' },
+        { label: 'Home', to: '/home' },
         { label: 'Novo Pet' },
       ]} />
       <header className={styles.header}>
-        <button className={styles.voltar} onClick={() => navigate('/')} aria-label="Voltar">←</button>
+        <button className={styles.voltar} onClick={() => navigate('/home')} aria-label="Voltar">←</button>
         <h1 className={styles.titulo}>Novo Pet</h1>
       </header>
 

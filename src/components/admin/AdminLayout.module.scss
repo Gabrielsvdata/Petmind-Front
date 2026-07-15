@@ -1,0 +1,116 @@
+.layout {
+  display: grid;
+  grid-template-columns: 14rem 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+
+  @media (max-width: 40em) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.header {
+  grid-column: 1 / -1;
+  background: #1f6b43;
+  color: white;
+  padding: $space-4 $space-6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $space-3;
+
+  @media (max-width: 40em) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.logo {
+  font-family: $fonte-pixel;
+  font-size: 0.8rem;
+  line-height: 1.8;
+}
+
+.headerAcoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: $space-2;
+}
+
+.acaoHeader,
+.acaoHeaderSecundaria {
+  padding: $space-2 $space-4;
+  border: $borda-ficha;
+  border-radius: $borda-organica;
+  font-family: $fonte-display;
+  font-weight: 800;
+  box-shadow: $sombra-solida;
+}
+
+.acaoHeader {
+  background: white;
+  color: #1f6b43;
+}
+
+.acaoHeaderSecundaria {
+  background: $cor-laranja;
+  color: white;
+}
+
+.sidebar {
+  background: white;
+  border-right: $borda-ficha;
+  padding: $space-5;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  @media (max-width: 40em) {
+    border-right: none;
+    border-bottom: $borda-ficha;
+  }
+}
+
+.sidebarTitulo {
+  font-family: $fonte-display;
+  font-size: 1.4rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.menuItem {
+  padding: $space-3 $space-4;
+  border-radius: 8% 30% 8% 30% / 30% 8% 30% 8%;
+  font-family: $fonte-display;
+  font-weight: 700;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+  background: transparent;
+  text-align: left;
+  width: 100%;
+
+  &:hover {
+    background: $cor-papel;
+  }
+}
+
+.ativo {
+  background: $cor-marrom;
+  color: white;
+  box-shadow: $sombra-solida;
+}
+
+.conteudo {
+  padding: $space-6;
+  background: $cor-papel;
+  overflow-y: auto;
+}

@@ -56,7 +56,7 @@ export default function Registrar() {
   return (
     <div className={styles.pagina}>
       <Breadcrumb itens={[
-        { label: 'Home', to: '/' },
+        { label: 'Home', to: '/home' },
         { label: pet?.nome ?? '...', to: `/pets/${id}` },
         { label: 'Registrar comportamento' },
       ]} />
