@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 import {
   cadastrarAdminBootstrap,
@@ -11,16 +11,16 @@ import styles from './Auth.module.scss'
 
 export default function CadastroConta() {
   const navigate = useNavigate()
-  const [tipoConta, setTipoConta] = useState('usuario')
+  const location = useLocation()
+  const tipoInicial = location.state?.tipoConta === 'admin' ? 'admin' : 'usuario'
+  const [tipoConta, setTipoConta] = useState(tipoInicial)
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [chaveBootstrap, setChaveBootstrap] = useState('')
-  const [adminBootstrapHabilitado, setAdminBootstrapHabilitado] = useState(false)
   const [adminBootstrapExigeChave, setAdminBootstrapExigeChave] = useState(false)
   const [erro, setErro] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [loadingStatus, setLoadingStatus] = useState(true)
   const [sucesso, setSucesso] = useState(false)
 
   useEffect(() => {
@@ -30,16 +30,10 @@ export default function CadastroConta() {
       try {
         const resposta = await statusBootstrapAdmin()
         if (!ativo) return
-        setAdminBootstrapHabilitado(Boolean(resposta.data?.habilitado))
         setAdminBootstrapExigeChave(Boolean(resposta.data?.exige_chave))
       } catch {
         if (!ativo) return
-        setAdminBootstrapHabilitado(false)
         setAdminBootstrapExigeChave(false)
-      } finally {
-        if (ativo) {
-          setLoadingStatus(false)
-        }
       }
     }
 
@@ -70,10 +64,6 @@ export default function CadastroConta() {
         setTimeout(() => navigate('/login'), 1300)
       }
     } catch (err) {
-      if (err.response?.status === 409) {
-        setAdminBootstrapHabilitado(false)
-        setTipoConta('usuario')
-      }
       setErro(err.response?.data?.detail ?? 'Falha no cadastro')
     } finally {
       setLoading(false)
@@ -83,35 +73,27 @@ export default function CadastroConta() {
   return (
     <div className={styles.pagina}>
       <form className={styles.card} onSubmit={handleSubmit}>
-        <h1 className={styles.titulo}>Criar conta</h1>
+        <h1 className={styles.titulo}>
+          {tipoConta === 'admin' ? 'Criar conta de administrador' : 'Criar conta'}
+        </h1>
 
-        {!loadingStatus && (
-          <>
-            <label className={styles.label}>Tipo de conta</label>
-            <div className={styles.grupoOpcoes}>
-              <button
-                className={tipoConta === 'usuario' ? styles.opcaoAtiva : styles.opcao}
-                type="button"
-                onClick={() => setTipoConta('usuario')}
-              >
-                Usuário comum
-              </button>
-              <button
-                className={tipoConta === 'admin' ? styles.opcaoAtiva : styles.opcao}
-                type="button"
-                onClick={() => adminBootstrapHabilitado && setTipoConta('admin')}
-                disabled={!adminBootstrapHabilitado}
-                title={
-                  adminBootstrapHabilitado
-                    ? 'Criar primeiro administrador'
-                    : 'Cadastro de administrador indisponível no momento'
-                }
-              >
-                Administrador
-              </button>
-            </div>
-          </>
-        )}
+        <label className={styles.label}>Tipo de conta</label>
+        <div className={styles.grupoOpcoes}>
+          <button
+            className={tipoConta === 'usuario' ? styles.opcaoAtiva : styles.opcao}
+            type="button"
+            onClick={() => setTipoConta('usuario')}
+          >
+            Usuário comum
+          </button>
+          <button
+            className={tipoConta === 'admin' ? styles.opcaoAtiva : styles.opcao}
+            type="button"
+            onClick={() => setTipoConta('admin')}
+          >
+            Administrador
+          </button>
+        </div>
 
         <label className={styles.label} htmlFor="nome">Nome</label>
         <input id="nome" className={styles.input} type="text" value={nome} onChange={(e) => setNome(e.target.value)} required />
@@ -136,12 +118,8 @@ export default function CadastroConta() {
           </>
         )}
 
-        {tipoConta === 'admin' && adminBootstrapHabilitado && (
-          <p className={styles.ok}>Conta de administrador será criada com acesso ao dashboard administrativo.</p>
-        )}
-
-        {!loadingStatus && !adminBootstrapHabilitado && (
-          <p className={styles.erro}>Cadastro de administrador indisponível. Use conta comum ou peça a um admin para criar acesso.</p>
+        {tipoConta === 'admin' && (
+          <p className={styles.ok}>Voce esta criando uma conta de administrador com acesso ao dashboard.</p>
         )}
 
         {erro && <p className={styles.erro}>{erro}</p>}

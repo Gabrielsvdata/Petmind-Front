@@ -76,7 +76,9 @@ export default function Login() {
         </button>
 
         <div className={styles.links}>
-          <Link to="/cadastro">Criar conta</Link>
+          <Link to="/cadastro" state={{ tipoConta: tipoAcesso }}>
+            {tipoAcesso === 'admin' ? 'Criar conta de administrador' : 'Criar conta'}
+          </Link>
         </div>
       </form>
     </div>
