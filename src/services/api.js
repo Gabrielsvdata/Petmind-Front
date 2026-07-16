@@ -60,6 +60,8 @@ api.interceptors.request.use((config) => {
 })
 
 export const cadastrarUsuario = (dados) => api.post('/auth/register', dados)
+export const statusBootstrapAdmin = () => api.get('/auth/admin-bootstrap/status')
+export const cadastrarAdminBootstrap = (dados) => api.post('/auth/register-admin', dados)
 export const loginUsuario = (dados) => api.post('/auth/login', dados)
 export const usuarioLogado = () => api.get('/auth/me')
 

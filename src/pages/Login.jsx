@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { loginUsuario, salvarAuth } from '../services/api'
+import { loginUsuario, salvarAuth, statusBootstrapAdmin } from '../services/api'
 import cachorroIdle from '../assets/sprites/cachorro/cachorro-idle.png'
 import styles from './Auth.module.scss'
 
@@ -10,8 +10,32 @@ export default function Login() {
   const [tipoAcesso, setTipoAcesso] = useState('usuario')
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
+  const [adminBootstrapHabilitado, setAdminBootstrapHabilitado] = useState(false)
+  const [loadingStatusAdmin, setLoadingStatusAdmin] = useState(true)
   const [erro, setErro] = useState(null)
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    let ativo = true
+
+    async function carregarStatusAdmin() {
+      try {
+        const resposta = await statusBootstrapAdmin()
+        if (!ativo) return
+        setAdminBootstrapHabilitado(Boolean(resposta.data?.habilitado))
+      } catch {
+        if (!ativo) return
+        setAdminBootstrapHabilitado(false)
+      } finally {
+        if (ativo) setLoadingStatusAdmin(false)
+      }
+    }
+
+    carregarStatusAdmin()
+    return () => {
+      ativo = false
+    }
+  }, [])
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -57,11 +81,25 @@ export default function Login() {
           <button
             className={tipoAcesso === 'admin' ? styles.opcaoAtiva : styles.opcao}
             type="button"
-            onClick={() => setTipoAcesso('admin')}
+            onClick={() => adminBootstrapHabilitado && setTipoAcesso('admin')}
+            disabled={!adminBootstrapHabilitado}
+            title={
+              adminBootstrapHabilitado
+                ? 'Entrar como administrador'
+                : 'Cadastro/login administrativo indisponível no momento'
+            }
           >
             Administrador
           </button>
         </div>
+
+        {!loadingStatusAdmin && adminBootstrapHabilitado && (
+          <p className={styles.ok}>Cadastro de administrador disponível em Criar conta.</p>
+        )}
+
+        {!loadingStatusAdmin && !adminBootstrapHabilitado && (
+          <p className={styles.erro}>Acesso de administrador está temporariamente indisponível para novas contas.</p>
+        )}
 
         <label className={styles.label} htmlFor="email">E-mail</label>
         <input id="email" className={`${styles.input} ${styles.loginInput}`} type="text" value={email} onChange={(e) => setEmail(e.target.value)} required />

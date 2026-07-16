@@ -111,6 +111,11 @@
 .opcao {
   background: white;
   color: $cor-marrom;
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
 }
 
 .opcaoAtiva {
