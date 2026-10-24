@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {
   cadastrarAdminBootstrap,
   cadastrarUsuario,
+  loginUsuario,
   salvarAuth,
   statusBootstrapAdmin,
 } from '../services/api'
@@ -49,13 +50,14 @@ export default function CadastroConta() {
     setLoading(true)
     try {
       if (tipoConta === 'admin') {
-        const resposta = await cadastrarAdminBootstrap({
+        await cadastrarAdminBootstrap({
           nome,
           email,
           senha,
           chave_bootstrap: adminBootstrapExigeChave ? chaveBootstrap : undefined,
         })
-        salvarAuth(email, senha, resposta.data)
+        const login = await loginUsuario({ email, senha })
+        salvarAuth(login.data)
         setSucesso(true)
         setTimeout(() => navigate('/admin'), 900)
       } else {
