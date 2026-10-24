@@ -3,7 +3,7 @@ import { obterAuth } from '../../services/api'
 
 export function RequireAuth() {
   const auth = obterAuth()
-  if (!auth?.email || !auth?.senha) {
+  if (!auth?.token) {
     return <Navigate to="/login" replace />
   }
   return <Outlet />

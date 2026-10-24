@@ -9,3 +9,7 @@ dist/
 # generated sprite css artifacts
 src/components/sprites/PetSprite.module.css
 src/components/sprites/PetSprite.module.css.map
+
+# Variáveis locais
+.env
+.env.local

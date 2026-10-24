@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { loginUsuario, salvarAuth } from '../services/api'
+import { loginDemo, loginUsuario, salvarAuth } from '../services/api'
 import cachorroIdle from '../assets/sprites/cachorro/cachorro-idle.png'
 import styles from './Auth.module.scss'
 
@@ -26,10 +26,25 @@ export default function Login() {
       if (tipoAcesso === 'usuario' && papel !== 'usuario') {
         throw new Error('Use a opção de acesso administrativo para esta conta')
       }
-      salvarAuth(email, senha, res.data)
+      salvarAuth(res.data)
       navigate(papel === 'admin' ? '/admin' : '/home')
     } catch (err) {
       setErro(err.response?.data?.detail ?? err.message ?? 'Falha no login')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Entra numa conta de demonstração (dados fictícios), sem senha
+  async function entrarDemo(perfil) {
+    setErro(null)
+    setLoading(true)
+    try {
+      const res = await loginDemo(perfil)
+      salvarAuth(res.data)
+      navigate(perfil === 'admin' ? '/admin' : '/home')
+    } catch (err) {
+      setErro(err.response?.data?.detail ?? 'Demonstração indisponível no momento')
     } finally {
       setLoading(false)
     }
@@ -79,6 +94,19 @@ export default function Login() {
           <Link to="/cadastro" state={{ tipoConta: tipoAcesso }}>
             {tipoAcesso === 'admin' ? 'Criar conta de administrador' : 'Criar conta'}
           </Link>
+        </div>
+
+        <div className={styles.demo}>
+          <p>Quer testar sem criar conta?</p>
+          <div className={styles.grupoOpcoes}>
+            <button className={styles.opcao} type="button" disabled={loading} onClick={() => entrarDemo('usuario')}>
+              Entrar como tutor
+            </button>
+            <button className={styles.opcao} type="button" disabled={loading} onClick={() => entrarDemo('admin')}>
+              Entrar como admin
+            </button>
+          </div>
+          <small>Contas de demonstração com dados fictícios.</small>
         </div>
       </form>
     </div>
